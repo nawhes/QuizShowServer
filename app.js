@@ -1,47 +1,33 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+const express = require('express');
+const path = require('path');
+const bodyParser = require('body-parser');
+const cors = require('cors');
+const index = require('./controllers/index');
 const { sequelize } = require('./models');
 
-var app = express();
+//Initialize our app variable
+const app = express();
 sequelize.sync();
 
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'pug');
-app.set('port', process.env.PORT || 8001);
+//Declaring Port
+const port = 3000;
 
-app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
+//Middleware for CORS
+app.use(cors());
+
+//Middleware for bodyparsing using both json and urlencoding
+app.use(bodyParser.urlencoded({extended:true}));
+app.use(bodyParser.json());
+
+/*express.static is a built in middleware function to serve static files.
+ We are telling express server public folder is the place to look for the static files
+*/
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/',index);
 
-// catch 404 and forward to error handler
-app.use((req, res, next) => {
-  const err = new Error('Not Found');
-  err.status = 404;
-  next(err);
+
+//Listen to port 3000
+app.listen(port, () => {
+    console.log(`Starting the server at port ${port}`);
 });
-
-// error handler
-app.use((err, req, res, next) => {
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
-  res.status(err.status || 500);
-  res.render('error');
-});
-
-app.listen(app.get('port'), () => {
-  console.log(app.get('port'), '번 포트에서 대기중');
-});
-
-module.exports = app;
