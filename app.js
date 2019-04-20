@@ -10,7 +10,7 @@ const app = express();
 sequelize.sync();
 
 //Declaring Port
-const port = 3000;
+const port = 8001;
 
 //Middleware for CORS
 app.use(cors());
