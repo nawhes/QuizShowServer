@@ -3,6 +3,7 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const index = require('./controllers/index');
+const user = require('./controllers/user');
 const { sequelize } = require('./models');
 
 //Initialize our app variable
@@ -25,6 +26,7 @@ app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/',index);
+app.use('/user',user);
 
 
 //Listen to port 3000
