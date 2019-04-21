@@ -28,10 +28,11 @@
         "dialect": "mysql"
     },
     "eth": {
-        "url": "http://localhost:8545"
+        "url": "https://ropsten.infura.io/v3/c0ed3b6c1cfe4e4d8f583a4d335d14fd"
     },
     "contract": {
-        "quiz": "0xdEba182A5Bb9f87a7eb3F1da02a93AD5d7fb0683"
+        "quiz": "0xf9da1791376e03da8cf6636aa65cfb72dc77169b"
     },
-    "admin": "0x515BC8E1De762fBF029538710E36d5bDc6780c04"
+    "admin": "0x2a02cd212dbc13c2457f1937b5c3ffe190970bd7",
+    "adminPK": "570649F60ACCF43702A258562E1677DDB6D701123427A6827DE1A53DF91EB6F8"
 }
