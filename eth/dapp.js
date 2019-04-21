@@ -41,8 +41,17 @@ exports.reserveQuizShow = function (request, callback) {
         web3.eth.sendSignedTransaction('0x' + serializedTx.toString('hex')).on('receipt', receipt => {
             console.log('RESULT!!!!');
             console.log(receipt);
+            var date = request.datetime;
+            var year = date.substring(0, 4);
+            var month = date.substring(4, 6);
+            var day = date.substring(6, 8);
+            var hour = date.substring(8, 10);
+            var min = date.substring(10, 12);
+            var sec = date.substring(12, 14);
+            var dDate = new Date(year, month - 1, day, hour, min, sec);
+            
             QuizInformation.create({
-                startDate: request.datetime,
+                startDate: dDate,
                 rewardAmount: request.amount,
                 rewardToken: request.prizeKind
             })
