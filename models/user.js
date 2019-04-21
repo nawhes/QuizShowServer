@@ -2,12 +2,12 @@ module.exports = (sequelize, DataTypes) => (
   sequelize.define('user', {
     email: {
       type: DataTypes.STRING(40),
-      allowNull: true,
+      allowNull: false,
       unique: true,
     },
     pubKey: {
       type: DataTypes.STRING(128),
-      allowNull: false,
+      allowNull: true,
       unique: true,
     },
     uid: {
@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => (
     },
     deviceToken: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
   }, {
     timestamps: true,
