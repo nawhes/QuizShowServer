@@ -7,9 +7,41 @@ router.post('/', async function(req, res, next) {
   try {
     const result = await User.create({
       email: req.body.email,
-      pubKey: req.body.pubKey,
       uid: req.body.uid,
+    });
+    console.log(result);
+    res.status(201).json(result);
+  } catch (error) {
+    console.log(error);
+    next(error);
+  }
+});
+
+router.patch('/pubKey', async function(req, res, next) {
+  try {
+    const result = await User.update({
+      pubKey: req.body.pubKey,
+    }, {
+      where: {
+        email: req.body.email,
+      }
+    });
+    console.log(result);
+    res.status(201).json(result);
+  } catch (error) {
+    console.log(error);
+    next(error);
+  }
+});
+
+router.patch('/deviceToken', async function(req, res, next) {
+  try {
+    const result = await User.update({
       deviceToken: req.body.deviceToken,
+    }, {
+      where: {
+        email: req.body.email,
+      }
     });
     console.log(result);
     res.status(201).json(result);
